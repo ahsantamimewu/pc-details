@@ -31,7 +31,24 @@ _.last = function (array, n) {
 // _.uniq(array)
 // Produces a duplicate-free version of the array, using === to test equality.
 // In particular only the first occurrence of each value is kept.
-_.uniq = function (array) {};
+_.uniq = function (array) {
+  if (!Array.isArray(array)) return [];
+  var result = [];
+  // iteraing over every element
+  for (var i = 0; i < array.length; i++) {
+    if (result.indexOf(array[i]) === -1) {
+      result.push(array[i]);
+      //lets say array=[1,1,2,3,3,4]
+      //this is the main part. In here first result=empty
+      //then for first element if(result.indexof(firstelementa[i measn 0th index]==-1 means not here))
+      //then push the first element in the result. now result becomes [1]
+      // again loop now a[i++ means 1st index] is 2 and now if(result.indexof(1==-1)) this condition won't work cause
+      //1 is here in reslt it will move to the next element
+      //That's how we got a duplicate free array
+    }
+  }
+  return result;
+};
 
 // OBJECTS
 
