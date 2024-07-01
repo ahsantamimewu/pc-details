@@ -17,7 +17,16 @@ _.first = function (array, n) {
 // _.last(array, [n])
 // Returns an array with the last n elements of an array.
 // If n is not provided it returns an array with just the last element.
-_.last = function (array, n) {};
+_.last = function (array, n) {
+  if (!array || !array.length) return [];
+  if (!Array.isArray(array)) {
+    let res = Array.prototype.slice.call(array);
+    return res.slice(-n);
+  }
+  if (n <= 0 || typeof n !== 'number') return array.slice(-1); //-1 means last elements of array
+  if (n > array.length) return array;
+  else return array.slice(-n); // -n meant lst nth elements of array like n=2 arr=[1,23,4,5,] then [4,5]
+};
 
 // _.uniq(array)
 // Produces a duplicate-free version of the array, using === to test equality.
