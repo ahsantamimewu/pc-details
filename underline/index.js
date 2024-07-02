@@ -89,7 +89,32 @@ _.defaults = function (destination, source) {
 // yielding each in turn to an iteratee function, that is called with three arguments:
 // (element, index|key, collection), and bound to the context if one is passed.
 // Returns the collection for chaining.
-_.each = function (collection, iteratee, context) {};
+_.each = function (collection, iteratee, context) {
+  if (context) {
+    iteratee = iteratee.bind(context);
+  }
+
+  // Check if the collection is an array
+  if (Array.isArray(collection)) {
+    for (let i = 0; i < collection.length; i++) {
+      iteratee(collection[i], i, collection);
+    }
+  } else if (typeof collection === 'object') {
+    // Iterate over the object's own properties
+    for (let key in collection) {
+      if (collection.hasOwnProperty(key)) {
+        iteratee(collection[key], key, collection);
+      }
+    }
+  }
+
+  // Return the original collection
+  return collection;
+  //Here callback function is the most important part,
+  // inspired from forEach https://www.youtube.com/watch?v=1mItbWuvrMw
+  //in each we have 3 arguments one is array/obj another is iterator which work is to find value index and full array/object
+  // last arg is context which if present we have to bind it with iterate
+};
 
 // _.contains(collection, value)
 // Returns an array of indexes / keys where value can be found in the collection.
