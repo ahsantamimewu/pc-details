@@ -71,7 +71,16 @@ _.extend = function (destination, source) {
 // Fills in undefined properties in the destination object
 // with own enumerable properties present in the source object,
 // and returns the destination object.
-_.defaults = function (destination, source) {};
+_.defaults = function (destination, source) {
+  for (key in source) {
+    if (source.hasOwnProperty(key) && destination[key] === undefined) {
+      destination[key] = source[key];
+    }
+  }
+  return destination;
+  // same of extend destination oject just adding a another condition if destinations ne of the key have undefined then
+  // add the source keyvalue in the destination
+};
 
 // COLLECTIONS
 
