@@ -55,7 +55,17 @@ _.uniq = function (array) {
 // _.extend(destination, source)
 // Copies all the own enumerable properties in the source object over
 // to the destination object, and returns it (without using `Object.assign`).
-_.extend = function (destination, source) {};
+_.extend = function (destination, source) {
+  //iterating over every key of source becaus destination will be override by source
+  //hasOwnProperty will find all the enumerable properties
+  for (key in source) {
+    if (source.hasOwnProperty(key)) {
+      destination[key] = source[key]; // dest[source's key]=source [key].value
+    }
+  }
+  //finally all the source key value will add in destination
+  return destination;
+};
 
 // _.defaults(destination, source)
 // Fills in undefined properties in the destination object

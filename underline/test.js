@@ -10,8 +10,21 @@
 // }
 // console.log(res);
 
-var res = [2, 3];
-if (res.indexOf(1 == -1)) {
-  res.push(1);
+// var res = [2, 3];
+// if (res.indexOf(1 == -1)) {
+//   res.push(1);
+// }
+// console.log(res);
+
+var player = { name: 'tamim', age: 24 };
+var player1 = { age: 23 };
+var player2 = {};
+for (let key in player1) {
+  player[key] = player1[key];
 }
-console.log(res);
+console.log(player2);
+if (player.hasOwnProperty) {
+  console.log(true);
+} else {
+  console.log(false);
+}
