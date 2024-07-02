@@ -131,7 +131,27 @@ _.contains = function (collection, value) {
 // Returns a new array of values by mapping each value in collection through iteratee.
 // Each invocation of iteratee is called with three arguments:
 // (element, index|key, collection), and bound to the context if one is passed.
-_.map = function (collection, iteratee, context) {};
+_.map = function (collection, iteratee, context) {
+  if (context) {
+    iteratee = iteratee.bind(context);
+  }
+  const result = [];
+  if (Array.isArray(collection)) {
+    for (let i = 0; i < collection.length; i++) {
+      result.push(iteratee(collection[i], i, collection));
+    }
+  } else if (typeof collection === 'object') {
+    for (key in collection) {
+      if (collection.hasOwnProperty(key)) {
+        result.push(iteratee(collection[key], key, collection));
+      }
+    }
+  }
+  return result;
+  //same from each just have to deaclare a empty array and push the result from iterate function value to the array
+  //each return collection of value index and array/obj
+  //map return array of these
+};
 
 // _.reduce(collection, iteratee, [accumulator], [context])
 // Reduce boils down a collection of values into a single value.
